@@ -1,16 +1,19 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg text-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ path('main_home') }}">Series</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <a class="navbar-brand" href="{{ path('main_home') }}"><img src="{{ asset('img/logo.svg') }}" alt="Series"></a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('main_home') }}">Home</a>
+                    <a class="nav-link active text-white" aria-current="page" href="{{ path('main_home') }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('main_test') }}">Test</a>
+                    <a class="nav-link text-white" href="{{ path('serie_list') }}">TV Shows</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ path('serie_add') }}">New TV Show</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ path('main_test') }}">Test</a>
                 </li>
             </ul>
         </div>

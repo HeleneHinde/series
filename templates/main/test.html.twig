@@ -1,14 +1,15 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h1>Test !</h1>
-
+    <h2>Bonjour {{ nameOfUser|striptags }} !</h2>
+    <p>{{ serie.title }} : {{ serie.year }}</p>
     {# Création de variable #}
 
     {% set name = "Camille" %}
 
     {# Affichage d'une variable #}
 
-    <h2>{{ name }}</h2>
+    <h2>Votre fils {{ name }}</h2>
 
     {% set colors = ['cornflowerblue', 'pink', 'purple', 'green'] %}
 

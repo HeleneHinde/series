@@ -19,7 +19,13 @@ class MainController extends AbstractController
     public function test(): Response
     {
 
-        return $this->render('main/test.html.twig');
+        $username = "<h2>Erwan</h2>";
+        $serie = ["title" => "The Witcher", "year"=>2019];
+        return $this->render('main/test.html.twig', [
+            "nameOfUser"=>$username,
+            "serie"=>$serie
+
+        ]);
 
     }
 

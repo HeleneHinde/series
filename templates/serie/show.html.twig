@@ -2,8 +2,43 @@
 
 {% block body %}
     <h2>Detail of a TV Show</h2>
+
+    <div class="serie-details">
+
+        <div>
+            <img src="{{ asset('img/posters/series/'~serie.poster) }}" alt="{{ serie.name }}">
+
+        </div>
+
+        <div class="serie-details-infos">
+            <h3>{{ serie.name }}</h3>
+            <div>User ratings : {{ serie.vote}}</div>
+            <div>Categorizes in : {{ serie.genres}}</div>
+            <div>Serie status : {{ serie.status}}</div>
+            <div>Aired from : {{ serie.firstAirDate|date}} to {{ serie.lastAirDate|date }}</div>
+            <div>{{ serie.overview|nl2br}}</div>
+
+        </div>
+
+    </div>
+
+
 {% endblock %}
 
 {% block tiltle %}
     {{ parent() }} | Show
+{% endblock %}
+
+{% block extraStyle %}
+
+    <style>
+
+        body{
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.5)), url("{{ asset('img/backdrops/'~serie.backdrop) }}");
+
+
+        }
+
+    </style>
+
 {% endblock %}

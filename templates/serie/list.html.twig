@@ -4,6 +4,16 @@
 
     <h2>List of TV Shows</h2>
 
+    <div class="flex_between flex_div">
+        {% if currentPage > 1 %}
+        <a class="link_button btn btn-outline-warning" href="{{ path('serie_list', {'page': currentPage-1}) }}" role="button" >Previous page</a>
+        {% endif %}
+        <div></div>
+        {% if currentPage < maxPage %}
+        <a class="link_button btn btn-outline-warning" href="{{ path('serie_list', {'page': currentPage+1}) }}" role="button" >Next page</a>
+        {% endif %}
+    </div>
+
     <section class="series-list">
 
         {% for serie in series %}

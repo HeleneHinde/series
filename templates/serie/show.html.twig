@@ -17,9 +17,9 @@
                 <div>Serie status : {{ serie.status }}</div>
                 <div>Aired from : {{ serie.firstAirDate|date }} to {{ serie.lastAirDate|date }}</div>
                 <div>{{ serie.overview|nl2br }}</div>
+                <a class="link_button btn btn-outline-warning" href="{{ path('serie_update', {'id': serie.id}) }}" role="button" >Modify the serie</a>
 
             </div>
-
         </div>
     </section>
 

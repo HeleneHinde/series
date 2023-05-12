@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
 class Serie
 {
+    const MAX_RESULT=48;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

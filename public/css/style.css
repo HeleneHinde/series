@@ -73,7 +73,11 @@ nav li {
     margin-right: 1rem; /*pourcentage de taille en fonction du zoom 1 rem = 10px pour zoom = 100%*/
 }
 
+.error ul li{
+    color: red;
+    list-style-type: none;
 
+}
 
 
 /********************** Module  5  Doctrine   **************************/

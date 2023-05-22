@@ -5,35 +5,56 @@ namespace App\Entity;
 use App\Repository\SerieRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use http\Message;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: SerieRepository::class)]
 class Serie
 {
     const MAX_RESULT=48;
 
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "Serie's name is mandatory")]
+    #[Assert\Length(
+        min : 1,
+        max : 255,
+        minMessage :  "Minimum {{ limit }} character",
+        maxMessage : "Maximum {{ limit }} characters"
+    )]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[Assert\Length(
+        min : 10,
+        max : 4000,
+        minMessage :  "Minimum {{ limit }} character",
+        maxMessage : "Maximum {{ limit }} characters"
+    )]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $overview = null;
 
+    #[Assert\NotBlank(message: "Serie's status is mandatory")]
+    #[Assert\Choice(choices: ["canceled","ended","returning"],message : "Value not allowed")]
     #[ORM\Column(length: 50)]
     private ?string $status = null;
 
+    #[Assert\Range(notInRangeMessage: "Not in range", min: 0, max: 10)]
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 1)]
     private ?string $vote = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $popularity = null;
 
+    #[Assert\Choice(choices: ["Drama","Comedy","Adventure","Sci-Fi"],message : "Value not allowed")]
     #[ORM\Column(length: 255)]
     private ?string $genres = null;
 
+    #[Assert\LessThan(propertyPath: "lastAirDate")]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $firstAirDate = null;
 

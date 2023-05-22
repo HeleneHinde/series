@@ -63,7 +63,7 @@ class SerieController extends AbstractController
         //Permet d'extraire les données de la requête
         $serieForm->handleRequest($request);
 
-        if ($serieForm->isSubmitted()) {
+        if ($serieForm->isSubmitted() && $serieForm->isValid()) {
             //traitement de la donnée
 
             //récupération des champs non mapped

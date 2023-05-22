@@ -34,7 +34,7 @@ class SerieType extends AbstractType
                     'Drama'=>'Drama',
                     'Comedy'=>'Comedy',
                     'Adventure'=>'Adventure',
-                    'SF'=>'Sci-Fi'
+                    'Sci-Fi'=>'Sci-Fi'
                 ],
                 'expanded'=>true,
                 'multiple'=>true,

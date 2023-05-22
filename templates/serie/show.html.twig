@@ -17,10 +17,31 @@
                 <div>Serie status : {{ serie.status }}</div>
                 <div>Aired from : {{ serie.firstAirDate|date }} to {{ serie.lastAirDate|date }}</div>
                 <div>{{ serie.overview|nl2br }}</div>
-                <a class="link_button btn btn-outline-warning" href="{{ path('serie_update', {'id': serie.id}) }}" role="button" >Modify the serie</a>
+                <a class="link_button btn btn-outline-warning" href="{{ path('serie_update', {'id': serie.id}) }}"
+                   role="button">Modify the serie</a>
 
             </div>
         </div>
+    </section>
+    <section class="seasons">
+        <h3>Seasons</h3>
+
+        {% for season in serie.seasons %}
+
+            <article>
+                <img src="{{ asset('img/posters/seasons/'~season.poster) }}"
+                     alt="{{ serie.name }} #{{ season.number }}">
+                <div>
+                    <h4>#{{ season.number }}</h4>
+                    <div>Aired from {{ season.firstAirDate| date('Y-m-d') }}</div>
+                    <div>{{ season.overview }}</div>
+                </div>
+
+
+            </article>
+
+        {% endfor %}
+
     </section>
 
 {% endblock %}

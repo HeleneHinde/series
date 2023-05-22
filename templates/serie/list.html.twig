@@ -6,11 +6,13 @@
 
     <div class="flex_between flex_div">
         {% if currentPage > 1 %}
-        <a class="link_button btn btn-outline-warning" href="{{ path('serie_list', {'page': currentPage-1}) }}" role="button" >Previous page</a>
+            <a class="link_button btn btn-outline-warning" href="{{ path('serie_list', {'page': currentPage-1}) }}"
+               role="button">Previous page</a>
         {% endif %}
         <div></div>
         {% if currentPage < maxPage %}
-        <a class="link_button btn btn-outline-warning" href="{{ path('serie_list', {'page': currentPage+1}) }}" role="button" >Next page</a>
+            <a class="link_button btn btn-outline-warning" href="{{ path('serie_list', {'page': currentPage+1}) }}"
+               role="button">Next page</a>
         {% endif %}
     </div>
 
@@ -18,12 +20,15 @@
 
         {% for serie in series %}
             <article>
-                <a href="{{ path('serie_show', {'id': serie.id}) }}" title="View details about {{ serie.name }}"><img src="{{ asset('img/posters/series/'~serie.poster) }}" alt="{{ serie.name }}"></a>
+                <a href="{{ path('serie_show', {'id': serie.id}) }}"
+                   title="View details about {{ serie.name }} | {{ serie.seasons|length }} seasons">
+                    <img src="{{ asset('img/posters/series/'~serie.poster) }}" alt="{{ serie.name }} "></a>
 
             </article>
         {% endfor %}
 
     </section>
+
 {% endblock %}
 
 {% block tiltle %}

@@ -1,0 +1,14 @@
+{% form_theme form 'views/theme/form_theme.html.twig' %}
+
+
+<h2>{% block h2 %}{% endblock %}</h2>
+<div>
+
+
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="link_button btn btn-outline-warning">{% block btnLabel %}{% endblock %}</button>
+    {{ form_end(form) }}
+
+</div>

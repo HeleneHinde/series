@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% embed 'views/form/default_form.html.twig' with {'form': serieForm} %}
+    {% embed 'views/form/default_form.html.twig' with {'form': seasonForm}  %}
         {% block h2 %}
-           Add a new serie !
+            Add a new season !
         {% endblock %}
         {% block btnLabel %}
             Add a new one !
@@ -15,4 +15,3 @@
 {% block tiltle %}
     {{ parent() }} | Add
 {% endblock %}
-

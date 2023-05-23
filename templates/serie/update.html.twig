@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% embed 'views/form/serie_form.html.twig' %}
+    {% embed 'views/form/default_form.html.twig' with {'form': serieForm}  %}
         {% block h2 %}
             Update de serie !
         {% endblock %}

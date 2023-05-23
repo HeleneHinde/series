@@ -17,8 +17,14 @@
                 <div>Serie status : {{ serie.status }}</div>
                 <div>Aired from : {{ serie.firstAirDate|date }} to {{ serie.lastAirDate|date }}</div>
                 <div>{{ serie.overview|nl2br }}</div>
-                <a class="link_button btn btn-outline-warning" href="{{ path('serie_update', {'id': serie.id}) }}"
+                <div class="container-fluid d-flex">
+                     <a class="link_button btn btn-outline-warning" href="{{ path('serie_update', {'id': serie.id}) }}"
                    role="button">Modify the serie</a>
+                    <a class="link_button btn btn-outline-warning" href="{{ path('season_add', {'id': serie.id}) }}"
+                   role="button">Add a season</a>
+                    <a class="link_button btn btn-danger" href="{{ path('serie_delete', {'id': serie.id}) }}"
+                       role="button" onclick="return confirm('Are you sure to delete {{ serie.name }}')">Delete the serie</a>
+                </div>
 
             </div>
         </div>
@@ -39,8 +45,8 @@
 
 
             </article>
-
         {% endfor %}
+
 
     </section>
 

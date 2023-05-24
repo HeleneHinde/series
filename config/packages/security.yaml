@@ -14,6 +14,11 @@ security:
             security: false
         main:
             lazy: true
+            custom_authenticator: App\Security\AppAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                target: serie_list
 
 
             # activate different ways to authenticate
@@ -26,6 +31,13 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
+
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:

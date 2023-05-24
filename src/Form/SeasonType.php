@@ -8,6 +8,7 @@ use App\Repository\SerieRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +23,9 @@ class SeasonType extends AbstractType
                 'widget'=>'single_text'
              ])
             ->add('overview')
-            ->add('poster')
+            ->add('poster', FileType::class, [
+                'mapped'=>false
+            ])
             ->add('tmdbId')
             //EntityType
             ->add('serie', EntityType::class, [

@@ -6,6 +6,7 @@ use App\Entity\Serie;
 use App\Form\SerieType;
 use App\Repository\SerieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,7 +53,7 @@ class SerieController extends AbstractController
         }
         return $this->render('serie/show.html.twig', ['serie' => $serie]);
     }
-
+    #[IsGranted("ROLE_USER")]
     #[Route('/add', name: 'add')]
     public function add(Request $request, SerieRepository $serieRepository): Response
     {
@@ -83,7 +84,7 @@ class SerieController extends AbstractController
 
         return $this->render('serie/add.html.twig', ['serieForm' => $serieForm->createView()]);
     }
-
+    #[IsGranted("ROLE_USER")]
     #[Route('/update/{id}', name: 'update', requirements: ["id" => "\d+"])]
     public function update(int $id, SerieRepository $serieRepository)
     {
@@ -113,7 +114,7 @@ class SerieController extends AbstractController
         return $this->render('serie/update.html.twig', ['serieForm' => $serieForm->createView()]);
 
     }
-
+    #[IsGranted("ROLE_USER")]
     #[Route('/delete/{id}', name: 'delete', requirements: ["id" => "\d+"])]
     public function delete(int $id, SerieRepository $serieRepository)
     {

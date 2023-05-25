@@ -6,6 +6,7 @@ use App\Entity\Season;
 use App\Form\SeasonType;
 use App\Repository\SeasonRepository;
 use App\Repository\SerieRepository;
+use App\Tools\Uploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,8 @@ class SeasonController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         int $id,
-        SerieRepository $serieRepository): Response
+        SerieRepository $serieRepository,
+        Uploader $uploader): Response
     {
         //récupération de l'instance de la série
         $serie=  $serieRepository->find($id);
@@ -46,8 +48,9 @@ class SeasonController extends AbstractController
             $file=$seasonForm->get('poster')->getData();
 
             if($file){
-                $newFileName = $season->getSerie()->getName()."-".$season->getNumber()."-".uniqid().".".$file->guessExtension();
-                $file->move('img/posters/seasons', $newFileName);
+                $name = $season->getSerie()->getName()."-".$season->getNumber();
+                $directory=$this->getParameter('upload_season_poster');
+                $newFileName=$uploader->save($file,$name,$directory);
                 $season->setPoster($newFileName);
 
             }

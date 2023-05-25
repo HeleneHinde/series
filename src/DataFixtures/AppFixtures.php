@@ -3,15 +3,26 @@
 namespace App\DataFixtures;
 
 use App\Entity\Serie;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private UserPasswordHasherInterface $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher=$hasher;
+
+    }
+
     public function load(ObjectManager $manager): void
     {
-        $this->addSeries($manager);
+        //$this->addSeries($manager);
+        $this->addUsers($manager);
     }
 
     public function addSeries(ObjectManager $manager):void {
@@ -40,6 +51,36 @@ class AppFixtures extends Fixture
 
         }
                 $manager->flush();
+
+    }
+
+    public function addUsers(ObjectManager $manager):void {
+
+
+        $generator = Factory::create('fr_FR');
+
+
+        for ($i=0;$i<10;$i++){
+
+            $user = new User();
+            $user
+
+                ->setEmail($generator->email)
+                ->setFirstname($generator->firstName)
+                ->setLastname($generator->lastName)
+                ->setRoles(['ROLE_USER'])
+                ->setPassword(
+                    $this->hasher->hashPassword(
+                        $user,
+                        '123'
+                    ));
+
+
+
+            $manager->persist($user);
+
+        }
+        $manager->flush();
 
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Serie;
 use App\Form\SerieType;
 use App\Repository\SerieRepository;
+use App\Tools\Uploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -55,7 +56,7 @@ class SerieController extends AbstractController
     }
     #[IsGranted("ROLE_USER")]
     #[Route('/add', name: 'add')]
-    public function add(Request $request, SerieRepository $serieRepository): Response
+    public function add(Request $request, SerieRepository $serieRepository, Uploader $uploader): Response
     {
 
         $serie = new Serie();
@@ -73,6 +74,25 @@ class SerieController extends AbstractController
 
             //new DateTime renvoi la date du jour
             $serie->setDateCreated(new \DateTime());
+
+            $filePoster=$serieForm->get('poster')->getData();
+            $filebackground=$serieForm->get('backdrop')->getData();
+
+            if($filePoster){
+                $name = $serie->getName();
+                $directory='img/posters/series';
+                $newFileName=$uploader->save($filePoster,$name,$directory);
+                $serie->setPoster($newFileName);
+
+            }
+
+            if($filebackground){
+                $name = $serie->getName();
+                $directory='img/backdrops';
+                $newFileName=$uploader->save($filebackground,$name,$directory);
+                $serie->setBackdrop($newFileName);
+            }
+
 
             //ajoute la série en BDD
             $serieRepository->save($serie, true);

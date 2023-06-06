@@ -106,12 +106,14 @@ class SerieController extends AbstractController
     }
     #[IsGranted("ROLE_USER")]
     #[Route('/update/{id}', name: 'update', requirements: ["id" => "\d+"])]
-    public function update(int $id, SerieRepository $serieRepository)
+    public function update(int $id, Request $request, SerieRepository $serieRepository)
     {
 
         $serie = $serieRepository->find($id);
 
         $serieForm = $this->createForm(SerieType::class, $serie);
+
+        $serieForm->handleRequest($request);
 
         if ($serieForm->isSubmitted()) {
             //traitement de la donnée

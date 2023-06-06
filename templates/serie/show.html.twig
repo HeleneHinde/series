@@ -25,6 +25,12 @@
                     <a class="link_button btn btn-danger" href="{{ path('serie_delete', {'id': serie.id}) }}"
                        role="button" onclick="return confirm('Are you sure to delete {{ serie.name }}')">Delete the serie</a>
                 </div>
+                <div class="container-fluid d-flex">
+                    <button value="1" class="like_btn link_button btn btn-outline-success">Like</button>
+                    <button value="0" class="like_btn link_button btn btn-outline-secondary">Dislike</button>
+
+                </div>
+                <div><span id="nbLike">{{ serie.nbLike }}</span> Likes</div>
 
             </div>
         </div>
@@ -68,4 +74,36 @@
 
     </style>
 
+{% endblock %}
+
+{% block extraJs %}
+
+    <script>
+
+        let buttons = Array.from(document.getElementsByClassName('like_btn'))
+        buttons.forEach(function(button){
+            button.addEventListener("click", function(){
+
+                let val = {'value' : this.value }
+
+                fetch("{{ path('api_series_update_one', {'id' : serie.id}) }}",
+                    { method :'PUT', body : JSON.stringify(val) })
+                    // then me permet de lancer une callback au retour de ma requête
+                    // j'extraie ici le corps de ma requête, à savoir le JSON
+                    .then((response) => response.json())
+                    // le second then récupère le json en paramêtre afin d'en faire le traitement
+                    .then((data)=>
+
+                    document.getElementById('nbLike').innerText = data.nbLike);
+
+            })
+
+
+        })
+
+
+
+
+
+    </script>
 {% endblock %}

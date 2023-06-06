@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 {% block body %}
     <h2>Welcome to Series !</h2>
+
+    {% set var ='<strong>titre en gras</strong>' %}
+
+    {{ var | raw }}
+    <p>coucou</p>
 {% endblock %}
 
 {% block tiltle %}
